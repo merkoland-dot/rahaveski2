@@ -129,14 +129,15 @@
 
         .timer-grid-3col {
             display: grid;
-            grid-template-columns: 1fr 180px 1fr;
+            grid-template-columns: 1fr 250px 1fr;
             gap: 20px;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .windmill-cell {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -145,6 +146,81 @@
             width: 180px;
             height: 200px;
             position: relative;
+        }
+
+        /* Controls under windmill */
+        .windmill-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .duration-mini {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .duration-mini-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 35px;
+        }
+
+        .duration-slider-mini {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .duration-slider-mini::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
+        .duration-slider-mini::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .estimated-mini {
+            font-size: 1em;
+            color: var(--accent-4);
+            font-weight: 600;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 10px 16px;
+            font-size: 0.95em;
         }
 
         .timer-display {
@@ -208,31 +284,22 @@
             font-size: 1em;
         }
 
-        /* Duration Slider */
-        .duration-slider-container {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 25px 30px;
-            margin-bottom: 30px;
+        /* People slider in settings */
+        .people-slider-group {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
         }
 
-        .slider-header {
+        .people-slider-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .slider-label {
-            font-size: 0.9em;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .slider-value {
-            font-size: 1.2em;
+        .people-slider-value {
+            font-size: 1.5em;
             font-weight: 700;
             background: var(--gradient-1);
             -webkit-background-clip: text;
@@ -240,7 +307,7 @@
             background-clip: text;
         }
 
-        .duration-slider {
+        .people-slider {
             width: 100%;
             height: 8px;
             border-radius: 4px;
@@ -251,62 +318,336 @@
             cursor: pointer;
         }
 
-        .duration-slider::-webkit-slider-thumb {
+        .people-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: var(--gradient-1);
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .duration-slider::-webkit-slider-thumb:hover {
+        .people-slider::-webkit-slider-thumb:hover {
             transform: scale(1.15);
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.7);
         }
 
-        .duration-slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+        .people-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: var(--gradient-1);
             cursor: pointer;
             border: none;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
         }
 
-        .slider-marks {
+        .people-slider-marks {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
-            padding: 0 5px;
-        }
-
-        .slider-marks span {
-            font-size: 0.75em;
+            margin-top: 5px;
+            font-size: 0.7em;
             color: var(--text-muted);
         }
 
-        .estimated-cost {
-            text-align: center;
-            margin-top: 20px;
+        /* Participants Section */
+        .participants-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(20px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
             font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-total {
+            font-size: 0.9em;
             color: var(--text-secondary);
         }
 
-        .estimated-cost strong {
-            font-size: 1.4em;
-            color: var(--accent-4);
-            margin-left: 10px;
+        .section-total strong {
+            color: var(--accent-1);
+            font-size: 1.2em;
         }
 
-        .timer-controls {
+        .participants-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .participant-card {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .participant-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .pc-value {
+            font-size: 3em;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        .participant-card:hover .pc-value {
+            transform: scale(1.05);
+        }
+
+        .participant-card .people-slider {
+            margin-bottom: 15px;
+        }
+
+        .pc-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pc-title {
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        .pc-rate {
+            font-size: 0.85em;
+            color: var(--accent-3);
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px);
+        }
+
+        .cta-top {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .duration-toggles {
+            display: flex;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .duration-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .duration-btn:hover {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--text-primary);
+        }
+
+        .duration-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Mega Start Button */
+        .btn-mega {
+            width: 100%;
+            padding: 25px 40px;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+            font-family: inherit;
+        }
+
+        .btn-mega:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-mega-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-mega-icon {
+            font-size: 1.5em;
+        }
+
+        .btn-mega-text {
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .btn-mega-cost {
+            text-align: right;
+        }
+
+        .btn-mega-price {
+            font-size: 2em;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+        }
+
+        .btn-mega-yearly {
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+
+        .btn-mega.pulse {
+            animation: pulseCost 0.3s ease;
+        }
+
+        @keyframes pulseCost {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* CTA Controls (shown when running) */
+        .cta-controls {
             display: flex;
             justify-content: center;
             gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-pause, .btn-resume, .btn-stop {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-pause {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--accent-3);
+        }
+
+        .btn-resume {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-4);
+        }
+
+        .btn-stop {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .btn-pause:hover, .btn-resume:hover, .btn-stop:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Charts Section (collapsible) */
+        .charts-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px);
+        }
+
+        .charts-header {
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .charts-header:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .charts-title {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .charts-arrow {
+            transition: transform 0.3s;
+            color: var(--text-muted);
+        }
+
+        .charts-arrow.rotated {
+            transform: rotate(180deg);
+        }
+
+        .charts-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .charts-content.expanded {
+            max-height: 800px;
+        }
+
+        .charts-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 25px;
+            padding: 0 25px 25px;
         }
 
         .btn {
@@ -365,91 +706,23 @@
             border-radius: 50%;
         }
 
-        /* Stats Row */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .stat-icon {
-            font-size: 2em;
-            margin-bottom: 15px;
-            filter: grayscale(0.2);
-        }
-
-        .stat-value {
-            font-size: 2em;
-            font-weight: 700;
-            margin-bottom: 8px;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Charts Grid */
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
+        /* Chart Cards (inside collapsible section) */
         .chart-card {
-            background: var(--bg-card);
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 35px;
-            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 25px;
         }
 
         .chart-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .chart-title {
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: 600;
             color: var(--text-primary);
         }
@@ -457,15 +730,15 @@
         .chart-badge {
             background: rgba(99, 102, 241, 0.15);
             color: var(--accent-1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75em;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.7em;
             font-weight: 600;
         }
 
         .chart-wrapper {
             position: relative;
-            height: 320px;
+            height: 280px;
         }
 
         /* Settings Panel */
@@ -656,8 +929,16 @@
 
         .windmill-blades-group {
             transform-origin: 100px 80px;
-            animation: spin 6s linear infinite;
+            animation: spin 8s linear infinite;
             transition: filter 0.5s ease;
+        }
+
+        .windmill-blades-group.spinning-slow {
+            animation: spin 5s linear infinite;
+        }
+
+        .windmill-blades-group.spinning-medium {
+            animation: spin 3s linear infinite;
         }
 
         .windmill-blades-group.spinning-fast {
@@ -672,6 +953,16 @@
         .blade-shape {
             fill: url(#bladeGradient);
             filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.5));
+            transition: filter 0.5s;
+        }
+
+        .spinning-slow .blade-shape {
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6));
+        }
+
+        .spinning-medium .blade-shape {
+            filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.7))
+                    drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
         }
 
         .spinning-fast .blade-shape {
@@ -721,7 +1012,7 @@
         /* Responsive */
         @media (max-width: 1024px) {
             .timer-grid-3col {
-                grid-template-columns: 1fr 150px 1fr;
+                grid-template-columns: 1fr 180px 1fr;
                 gap: 15px;
             }
 
@@ -734,16 +1025,37 @@
                 font-size: 3em;
             }
 
-            .charts-grid {
+            .participants-grid {
+                gap: 15px;
+            }
+
+            .pc-value {
+                font-size: 2.5em;
+            }
+
+            .duration-btn {
+                padding: 8px 12px;
+                font-size: 0.85em;
+            }
+
+            .btn-mega {
+                padding: 20px 30px;
+            }
+
+            .btn-mega-text {
+                font-size: 1.1em;
+            }
+
+            .btn-mega-price {
+                font-size: 1.6em;
+            }
+
+            .charts-inner {
                 grid-template-columns: 1fr;
             }
 
             .salary-groups {
                 grid-template-columns: 1fr;
-            }
-
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -754,7 +1066,7 @@
             }
 
             .windmill-cell {
-                order: -1;
+                order: 0;
             }
 
             .windmill-container {
@@ -765,6 +1077,56 @@
             .timer-time, .cost-amount {
                 font-size: 2.8em;
             }
+
+            .participants-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .participant-card {
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+
+            .pc-value {
+                font-size: 2em;
+                margin-bottom: 0;
+                order: 1;
+            }
+
+            .participant-card .people-slider {
+                margin-bottom: 0;
+                order: 2;
+            }
+
+            .pc-footer {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 2px;
+                order: 3;
+            }
+
+            .btn-mega {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .btn-mega-content {
+                justify-content: center;
+            }
+
+            .btn-mega-cost {
+                text-align: center;
+            }
+
+            .duration-toggles {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 640px) {
@@ -772,20 +1134,25 @@
                 font-size: 2.2em;
             }
 
-            .stats-row {
-                grid-template-columns: 1fr;
+            .pc-value {
+                font-size: 1.8em;
+            }
+
+            .btn-mega-text {
+                font-size: 1em;
+            }
+
+            .duration-btn {
+                padding: 8px 10px;
+                font-size: 0.8em;
             }
 
             .global-settings {
                 grid-template-columns: 1fr;
             }
 
-            .timer-controls {
+            .cta-controls {
                 flex-wrap: wrap;
-            }
-
-            .slider-marks span {
-                font-size: 0.65em;
             }
         }
     </style>
@@ -808,10 +1175,10 @@
                 <div class="timer-display">
                     <div class="timer-label">Koosoleku kestus</div>
                     <div class="timer-time" id="timerDisplay">00:00:00</div>
-                    <div class="cost-subtitle" id="timerSubtitle">Vajuta Start alustamiseks</div>
+                    <div class="cost-subtitle" id="timerSubtitle">Seadista ja vajuta Start</div>
                 </div>
 
-                <!-- Windmill in center -->
+                <!-- Windmill in center - PURE VISUAL -->
                 <div class="windmill-cell">
                     <div class="windmill-container" id="windmill">
                         <svg class="windmill-svg" viewBox="0 0 200 240">
@@ -860,86 +1227,104 @@
                     <div class="cost-subtitle" id="costPerSecond">+0.00 €/sek</div>
                 </div>
             </div>
+        </section>
 
-            <!-- Duration Slider -->
-            <div class="duration-slider-container">
-                <div class="slider-header">
-                    <span class="slider-label">Planeeritud kestus</span>
-                    <span class="slider-value" id="sliderValue">1 tund</span>
+        <!-- Participants Section -->
+        <section class="participants-section">
+            <div class="section-header">
+                <span class="section-title">👥 Osalejad</span>
+                <span class="section-total">Kokku: <strong id="totalPeopleInline">32</strong></span>
+            </div>
+            <div class="participants-grid">
+                <div class="participant-card">
+                    <div class="pc-value" id="quickPeopleValue1">25</div>
+                    <input type="range" class="people-slider" id="quickPeople1" min="0" max="50" value="25">
+                    <div class="pc-footer">
+                        <span class="pc-title">Grupp 1</span>
+                        <span class="pc-rate" id="quickRate1">12.76 €/h</span>
+                    </div>
                 </div>
-                <input type="range" class="duration-slider" id="durationSlider" min="0.5" max="3" step="0.5" value="1">
-                <div class="slider-marks">
-                    <span>30min</span>
-                    <span>1h</span>
-                    <span>1.5h</span>
-                    <span>2h</span>
-                    <span>2.5h</span>
-                    <span>3h</span>
+                <div class="participant-card">
+                    <div class="pc-value" id="quickPeopleValue2">5</div>
+                    <input type="range" class="people-slider" id="quickPeople2" min="0" max="30" value="5">
+                    <div class="pc-footer">
+                        <span class="pc-title">Grupp 2</span>
+                        <span class="pc-rate" id="quickRate2">19.14 €/h</span>
+                    </div>
                 </div>
-                <div class="estimated-cost">
-                    Eeldatav kulu: <strong id="estimatedCost">471.00 €</strong>
+                <div class="participant-card">
+                    <div class="pc-value" id="quickPeopleValue3">2</div>
+                    <input type="range" class="people-slider" id="quickPeople3" min="0" max="15" value="2">
+                    <div class="pc-footer">
+                        <span class="pc-title">Grupp 3</span>
+                        <span class="pc-rate" id="quickRate3">27.92 €/h</span>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="timer-controls">
-                <button class="btn btn-primary" id="startBtn" onclick="startTimer()">
-                    <span>▶</span> Alusta koosolekut
-                </button>
-                <button class="btn btn-secondary" id="pauseBtn" onclick="pauseTimer()" style="display: none;">
+        <!-- CTA Section: Duration + Start -->
+        <section class="cta-section">
+            <div class="cta-top">
+                <div class="duration-toggles" id="durationToggles">
+                    <button class="duration-btn" data-value="0.5">30m</button>
+                    <button class="duration-btn active" data-value="1">1h</button>
+                    <button class="duration-btn" data-value="1.5">1.5h</button>
+                    <button class="duration-btn" data-value="2">2h</button>
+                    <button class="duration-btn" data-value="2.5">2.5h</button>
+                    <button class="duration-btn" data-value="3">3h</button>
+                </div>
+            </div>
+            <button class="btn-mega" id="startBtn" onclick="startTimer()">
+                <div class="btn-mega-content">
+                    <span class="btn-mega-icon">▶</span>
+                    <span class="btn-mega-text">Alusta koosolekut</span>
+                </div>
+                <div class="btn-mega-cost">
+                    <span class="btn-mega-price" id="estimatedCost">471 €</span>
+                    <span class="btn-mega-yearly">≈ <span id="yearlyEstimate">24k</span> € aastas</span>
+                </div>
+            </button>
+            <div class="cta-controls" id="ctaControls" style="display: none;">
+                <button class="btn btn-pause" id="pauseBtn" onclick="pauseTimer()">
                     <span>⏸</span> Peata
                 </button>
-                <button class="btn btn-secondary" id="resumeBtn" onclick="resumeTimer()" style="display: none;">
+                <button class="btn btn-resume" id="resumeBtn" onclick="resumeTimer()" style="display: none;">
                     <span>▶</span> Jätka
                 </button>
-                <button class="btn btn-danger" id="stopBtn" onclick="stopTimer()" style="display: none;">
+                <button class="btn btn-stop" id="stopBtn" onclick="stopTimer()">
                     <span>⏹</span> Lõpeta
                 </button>
             </div>
         </section>
 
-        <!-- Stats Row -->
-        <section class="stats-row">
-            <div class="stat-card">
-                <div class="stat-icon">👥</div>
-                <div class="stat-value" id="totalPeople">32</div>
-                <div class="stat-label">Osalejat</div>
+        <!-- Charts (collapsible) -->
+        <section class="charts-section">
+            <div class="charts-header" onclick="toggleCharts()">
+                <span class="charts-title">📊 Graafikud</span>
+                <span class="charts-arrow" id="chartsArrow">▼</span>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">💶</div>
-                <div class="stat-value" id="hourlyRate">471 €</div>
-                <div class="stat-label">Tunni kulu</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">⚡</div>
-                <div class="stat-value" id="perMinute">7.85 €</div>
-                <div class="stat-label">Minuti kulu</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">📅</div>
-                <div class="stat-value" id="yearlyEstimate">24k €</div>
-                <div class="stat-label">Aastas (iganädalane)</div>
-            </div>
-        </section>
+            <div class="charts-content" id="chartsContent">
+                <div class="charts-inner">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Kulu jaotus</span>
+                            <span class="chart-badge">Reaalajas</span>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
 
-        <!-- Charts -->
-        <section class="charts-grid">
-            <div class="chart-card">
-                <div class="chart-header">
-                    <span class="chart-title">Kulu jaotus</span>
-                    <span class="chart-badge">Reaalajas</span>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="pieChart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-card">
-                <div class="chart-header">
-                    <span class="chart-title">Osalejad vs Kulu grupiti</span>
-                    <span class="chart-badge">Analüüs</span>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="barChart"></canvas>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Osalejad vs Kulu grupiti</span>
+                            <span class="chart-badge">Analüüs</span>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -974,9 +1359,17 @@
                                 <label class="input-label">Tunnihind (€)</label>
                                 <div class="computed-value" id="hourly1">12.76</div>
                             </div>
-                            <div class="input-group">
-                                <label class="input-label">Inimeste arv</label>
-                                <input type="number" class="input-field" id="people1" value="25">
+                            <div class="people-slider-group">
+                                <div class="people-slider-header">
+                                    <label class="input-label">Inimeste arv</label>
+                                    <span class="people-slider-value" id="peopleValue1">25</span>
+                                </div>
+                                <input type="range" class="people-slider" id="people1" min="0" max="50" value="25">
+                                <div class="people-slider-marks">
+                                    <span>0</span>
+                                    <span>25</span>
+                                    <span>50</span>
+                                </div>
                             </div>
                         </div>
 
@@ -997,9 +1390,17 @@
                                 <label class="input-label">Tunnihind (€)</label>
                                 <div class="computed-value" id="hourly2">19.14</div>
                             </div>
-                            <div class="input-group">
-                                <label class="input-label">Inimeste arv</label>
-                                <input type="number" class="input-field" id="people2" value="5">
+                            <div class="people-slider-group">
+                                <div class="people-slider-header">
+                                    <label class="input-label">Inimeste arv</label>
+                                    <span class="people-slider-value" id="peopleValue2">5</span>
+                                </div>
+                                <input type="range" class="people-slider" id="people2" min="0" max="30" value="5">
+                                <div class="people-slider-marks">
+                                    <span>0</span>
+                                    <span>15</span>
+                                    <span>30</span>
+                                </div>
                             </div>
                         </div>
 
@@ -1020,9 +1421,17 @@
                                 <label class="input-label">Tunnihind (€)</label>
                                 <div class="computed-value" id="hourly3">27.92</div>
                             </div>
-                            <div class="input-group">
-                                <label class="input-label">Inimeste arv</label>
-                                <input type="number" class="input-field" id="people3" value="2">
+                            <div class="people-slider-group">
+                                <div class="people-slider-header">
+                                    <label class="input-label">Inimeste arv</label>
+                                    <span class="people-slider-value" id="peopleValue3">2</span>
+                                </div>
+                                <input type="range" class="people-slider" id="people3" min="0" max="15" value="2">
+                                <div class="people-slider-marks">
+                                    <span>0</span>
+                                    <span>7</span>
+                                    <span>15</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1057,14 +1466,49 @@
         // Chart instances
         let pieChart, barChart;
 
-        // Windmill control
-        function setWindmillSpeed(fast) {
+        // Windmill control - supports cost-based speed
+        function setWindmillSpeed(mode) {
             const blades = document.getElementById('windmillBlades');
-            if (fast) {
+            blades.classList.remove('spinning-fast', 'spinning-medium', 'spinning-slow');
+            
+            if (mode === 'fast') {
                 blades.classList.add('spinning-fast');
-            } else {
-                blades.classList.remove('spinning-fast');
+            } else if (mode === 'medium') {
+                blades.classList.add('spinning-medium');
+            } else if (mode === 'slow') {
+                blades.classList.add('spinning-slow');
             }
+            // 'idle' uses default animation
+        }
+
+        function updateWindmillByCost() {
+            if (isRunning) return; // Don't change during timer
+            
+            const cost = getCurrentEstimatedCost();
+            if (cost > 800) {
+                setWindmillSpeed('fast');
+            } else if (cost > 400) {
+                setWindmillSpeed('medium');
+            } else if (cost > 200) {
+                setWindmillSpeed('slow');
+            } else {
+                setWindmillSpeed('idle');
+            }
+        }
+
+        function getCurrentEstimatedCost() {
+            const taxPercent = parseFloat(document.getElementById('taxPercent').value) || 34;
+            const monthlyHours = parseFloat(document.getElementById('monthlyHours').value) || 168;
+            
+            let totalHourlyCost = 0;
+            for (let i = 1; i <= 3; i++) {
+                const salary = parseFloat(document.getElementById('salary' + i).value) || 0;
+                const people = parseInt(document.getElementById('people' + i).value) || 0;
+                const employerCost = salary * (1 + taxPercent / 100);
+                const hourlyCost = employerCost / monthlyHours;
+                totalHourlyCost += hourlyCost * people;
+            }
+            return totalHourlyCost * selectedDuration;
         }
 
         // Money particles
@@ -1101,44 +1545,109 @@
             clearInterval(moneyParticleInterval);
         }
 
+        function updatePeopleSliders() {
+            for (let i = 1; i <= 3; i++) {
+                const slider = document.getElementById('people' + i);
+                const quickSlider = document.getElementById('quickPeople' + i);
+                const valueDisplay = document.getElementById('peopleValue' + i);
+                const quickValueDisplay = document.getElementById('quickPeopleValue' + i);
+                
+                if (slider && valueDisplay) {
+                    valueDisplay.textContent = slider.value;
+                }
+                if (quickSlider && quickValueDisplay) {
+                    quickValueDisplay.textContent = quickSlider.value;
+                }
+            }
+        }
+
+        function syncSliders(sourcePrefix, targetPrefix) {
+            for (let i = 1; i <= 3; i++) {
+                const source = document.getElementById(sourcePrefix + i);
+                const target = document.getElementById(targetPrefix + i);
+                if (source && target) {
+                    target.value = source.value;
+                }
+            }
+        }
+
+        // Selected duration (in hours)
+        let selectedDuration = 1;
+
         // Initialize
         window.onload = function() {
             updateAllCosts();
-            updateSlider();
+            updateEstimatedCost();
+            updatePeopleSliders();
+            updateQuickRates();
             initCharts();
             
             // Add event listeners to all inputs
             document.querySelectorAll('.input-field').forEach(input => {
                 input.addEventListener('input', () => {
                     updateAllCosts();
-                    updateSlider();
+                    updateEstimatedCost();
+                    updateQuickRates();
                     updateCharts();
                 });
             });
 
-            // Duration slider listener
-            document.getElementById('durationSlider').addEventListener('input', () => {
-                updateSlider();
-                updateAllCosts();
+            // People sliders in settings
+            for (let i = 1; i <= 3; i++) {
+                const settingsSlider = document.getElementById('people' + i);
+                const quickSlider = document.getElementById('quickPeople' + i);
+                
+                if (settingsSlider) {
+                    settingsSlider.addEventListener('input', () => {
+                        // Sync to quick slider
+                        if (quickSlider) quickSlider.value = settingsSlider.value;
+                        updatePeopleSliders();
+                        updateAllCosts();
+                        updateEstimatedCost();
+                        updateCharts();
+                    });
+                }
+                
+                if (quickSlider) {
+                    quickSlider.addEventListener('input', () => {
+                        // Sync to settings slider
+                        if (settingsSlider) settingsSlider.value = quickSlider.value;
+                        updatePeopleSliders();
+                        updateAllCosts();
+                        updateEstimatedCost();
+                        updateCharts();
+                    });
+                }
+            }
+
+            // Duration toggle buttons
+            document.querySelectorAll('.duration-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.duration-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedDuration = parseFloat(btn.dataset.value);
+                    updateEstimatedCost();
+                    updateAllCosts();
+                });
             });
         };
 
-        function updateSlider() {
-            const slider = document.getElementById('durationSlider');
-            const duration = parseFloat(slider.value);
+        function updateQuickRates() {
+            const taxPercent = parseFloat(document.getElementById('taxPercent').value) || 34;
+            const monthlyHours = parseFloat(document.getElementById('monthlyHours').value) || 168;
             
-            // Update slider value display
-            let valueText;
-            if (duration < 1) {
-                valueText = (duration * 60) + ' minutit';
-            } else if (duration === 1) {
-                valueText = '1 tund';
-            } else {
-                valueText = duration + ' tundi';
+            for (let i = 1; i <= 3; i++) {
+                const salary = parseFloat(document.getElementById('salary' + i).value) || 0;
+                const employerCost = calculateEmployerCost(salary, taxPercent);
+                const hourlyCost = calculateHourlyCost(employerCost, monthlyHours);
+                const rateEl = document.getElementById('quickRate' + i);
+                if (rateEl) {
+                    rateEl.textContent = formatNumber(hourlyCost) + ' €/h';
+                }
             }
-            document.getElementById('sliderValue').textContent = valueText;
-            
-            // Calculate estimated cost
+        }
+
+        function updateEstimatedCost() {
             const taxPercent = parseFloat(document.getElementById('taxPercent').value) || 34;
             const monthlyHours = parseFloat(document.getElementById('monthlyHours').value) || 168;
             
@@ -1151,8 +1660,29 @@
                 totalHourlyCost += hourlyCost * people;
             }
             
-            const estimatedCost = totalHourlyCost * duration;
-            document.getElementById('estimatedCost').textContent = formatNumber(estimatedCost) + ' €';
+            const estimatedCost = totalHourlyCost * selectedDuration;
+            const yearly = estimatedCost * 52;
+            
+            document.getElementById('estimatedCost').textContent = Math.round(estimatedCost) + ' €';
+            document.getElementById('yearlyEstimate').textContent = formatCompact(yearly);
+            
+            // Pulse animation on mega button
+            const megaBtn = document.getElementById('startBtn');
+            if (megaBtn) {
+                megaBtn.classList.remove('pulse');
+                void megaBtn.offsetWidth; // Trigger reflow
+                megaBtn.classList.add('pulse');
+            }
+            
+            // Update windmill speed based on cost
+            updateWindmillByCost();
+        }
+
+        function toggleCharts() {
+            const content = document.getElementById('chartsContent');
+            const arrow = document.getElementById('chartsArrow');
+            content.classList.toggle('expanded');
+            arrow.classList.toggle('rotated');
         }
 
         function calculateEmployerCost(grossSalary, taxPercent) {
@@ -1177,7 +1707,6 @@
         function updateAllCosts() {
             const taxPercent = parseFloat(document.getElementById('taxPercent').value) || 34;
             const monthlyHours = parseFloat(document.getElementById('monthlyHours').value) || 168;
-            const sliderDuration = parseFloat(document.getElementById('durationSlider').value) || 1;
 
             let totalHourlyCost = 0;
             let totalPeople = 0;
@@ -1196,15 +1725,13 @@
                 totalPeople += people;
             }
 
-            const perMinute = totalHourlyCost / 60;
-            const meetingCost = totalHourlyCost * sliderDuration;
-            const yearly = meetingCost * 52; // weekly meetings for a year
             costPerSecond = totalHourlyCost / 3600;
 
-            document.getElementById('totalPeople').textContent = totalPeople;
-            document.getElementById('hourlyRate').textContent = formatNumber(totalHourlyCost) + ' €';
-            document.getElementById('perMinute').textContent = formatNumber(perMinute) + ' €';
-            document.getElementById('yearlyEstimate').textContent = formatCompact(yearly) + ' €';
+            // Update inline total people
+            const totalPeopleEl = document.getElementById('totalPeopleInline');
+            if (totalPeopleEl) totalPeopleEl.textContent = totalPeople;
+            
+            // Update cost per second display
             document.getElementById('costPerSecond').textContent = '+' + formatNumber(costPerSecond) + ' €/sek';
         }
 
@@ -1223,14 +1750,16 @@
             elapsedSeconds = 0;
             
             document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('ctaControls').style.display = 'flex';
             document.getElementById('pauseBtn').style.display = 'flex';
+            document.getElementById('resumeBtn').style.display = 'none';
             document.getElementById('stopBtn').style.display = 'flex';
             document.getElementById('timerSubtitle').textContent = 'Koosolek käib...';
             document.getElementById('timerDisplay').classList.add('running');
             document.getElementById('liveCost').classList.add('running');
 
             // Speed up windmill and start money particles
-            setWindmillSpeed(true);
+            setWindmillSpeed('fast');
             startMoneyParticles();
 
             timerInterval = setInterval(updateTimer, 100);
@@ -1249,7 +1778,7 @@
             document.getElementById('liveCost').classList.remove('running');
 
             // Slow down windmill and stop particles
-            setWindmillSpeed(false);
+            setWindmillSpeed('idle');
             stopMoneyParticles();
         }
 
@@ -1265,7 +1794,7 @@
             document.getElementById('liveCost').classList.add('running');
 
             // Speed up windmill and start particles again
-            setWindmillSpeed(true);
+            setWindmillSpeed('fast');
             startMoneyParticles();
 
             timerInterval = setInterval(updateTimer, 100);
@@ -1278,16 +1807,14 @@
             const finalCost = (elapsedSeconds * costPerSecond).toFixed(2);
             const duration = formatTime(elapsedSeconds);
             
-            document.getElementById('pauseBtn').style.display = 'none';
-            document.getElementById('resumeBtn').style.display = 'none';
-            document.getElementById('stopBtn').style.display = 'none';
+            document.getElementById('ctaControls').style.display = 'none';
             document.getElementById('startBtn').style.display = 'flex';
             document.getElementById('timerSubtitle').textContent = `Koosolek lõppes: ${finalCost} €`;
             document.getElementById('timerDisplay').classList.remove('running');
             document.getElementById('liveCost').classList.remove('running');
 
-            // Slow down windmill and stop particles
-            setWindmillSpeed(false);
+            // Reset windmill to cost-based speed and stop particles
+            updateWindmillByCost();
             stopMoneyParticles();
         }
 
