@@ -595,6 +595,117 @@
             transform: translateY(-2px);
         }
 
+        /* Usefulness Question */
+        .usefulness-question {
+            text-align: center;
+            padding: 10px 0;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .uq-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .uq-icon {
+            font-size: 2em;
+        }
+
+        .uq-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .uq-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+        }
+
+        .uq-stats strong {
+            color: var(--accent-1);
+        }
+
+        .uq-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .uq-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .uq-btn-yes {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-4);
+        }
+
+        .uq-btn-yes:hover {
+            background: rgba(16, 185, 129, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .uq-btn-no {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .uq-btn-no:hover {
+            background: rgba(239, 68, 68, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .uq-btn-meh {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--accent-3);
+        }
+
+        .uq-btn-meh:hover {
+            background: rgba(251, 191, 36, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .uq-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .uq-result-emoji {
+            font-size: 3em;
+        }
+
+        .uq-result-message {
+            font-size: 1.2em;
+            color: var(--text-primary);
+            max-width: 400px;
+        }
+
         /* Charts Section (collapsible) */
         .charts-section {
             background: var(--bg-card);
@@ -1808,7 +1919,7 @@
             const duration = formatTime(elapsedSeconds);
             
             document.getElementById('ctaControls').style.display = 'none';
-            document.getElementById('startBtn').style.display = 'flex';
+            document.getElementById('startBtn').style.display = 'none';
             document.getElementById('timerSubtitle').textContent = `Koosolek lõppes: ${finalCost} €`;
             document.getElementById('timerDisplay').classList.remove('running');
             document.getElementById('liveCost').classList.remove('running');
@@ -1816,6 +1927,86 @@
             // Reset windmill to cost-based speed and stop particles
             updateWindmillByCost();
             stopMoneyParticles();
+
+            // Show usefulness question
+            showUsefulnessQuestion(finalCost, duration);
+        }
+
+        function showUsefulnessQuestion(cost, duration) {
+            const ctaSection = document.querySelector('.cta-section');
+            
+            // Create the question UI
+            const questionHtml = `
+                <div class="usefulness-question" id="usefulnessQuestion">
+                    <div class="uq-header">
+                        <span class="uq-icon">🤔</span>
+                        <span class="uq-title">Kas koosolekust oli kasu?</span>
+                    </div>
+                    <div class="uq-stats">
+                        <span>Kestus: <strong>${duration}</strong></span>
+                        <span>Kulu: <strong>${cost} €</strong></span>
+                    </div>
+                    <div class="uq-buttons">
+                        <button class="uq-btn uq-btn-yes" onclick="answerUsefulness(true, ${cost})">
+                            <span>👍</span> Jah, oli!
+                        </button>
+                        <button class="uq-btn uq-btn-no" onclick="answerUsefulness(false, ${cost})">
+                            <span>👎</span> Ei olnud
+                        </button>
+                        <button class="uq-btn uq-btn-meh" onclick="answerUsefulness('meh', ${cost})">
+                            <span>😐</span> Nii ja naa
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Hide the mega button and show question
+            const megaBtn = document.getElementById('startBtn');
+            megaBtn.style.display = 'none';
+            
+            // Insert question
+            ctaSection.insertAdjacentHTML('beforeend', questionHtml);
+        }
+
+        function answerUsefulness(answer, cost) {
+            const question = document.getElementById('usefulnessQuestion');
+            let message = '';
+            let emoji = '';
+            
+            if (answer === true) {
+                emoji = '☕';
+                message = 'Tore, said vähemalt kohvi juua.';
+            } else if (answer === false) {
+                emoji = '😤';
+                message = `Jürgen Ligi seda küll heaks ei kiida.`;
+            } else {
+                emoji = '🫠';
+                message = 'Kahju, et vastasid nagu Jüri Ratas.';
+            }
+            
+            question.innerHTML = `
+                <div class="uq-result">
+                    <span class="uq-result-emoji">${emoji}</span>
+                    <span class="uq-result-message">${message}</span>
+                </div>
+                <button class="btn-mega" onclick="resetAfterQuestion()" style="margin-top: 20px;">
+                    <div class="btn-mega-content">
+                        <span class="btn-mega-icon">🔄</span>
+                        <span class="btn-mega-text">Uus koosolek</span>
+                    </div>
+                </button>
+            `;
+        }
+
+        function resetAfterQuestion() {
+            const question = document.getElementById('usefulnessQuestion');
+            if (question) question.remove();
+            
+            document.getElementById('startBtn').style.display = 'flex';
+            document.getElementById('timerDisplay').textContent = '00:00:00';
+            document.getElementById('liveCost').textContent = '0.00 €';
+            document.getElementById('timerSubtitle').textContent = 'Seadista ja vajuta Start';
+            elapsedSeconds = 0;
         }
 
         function updateTimer() {
